@@ -8,22 +8,25 @@ for(int i=0;i<n;i++){
     cin>>vec[i];
 }
 
-sort(vec.begin(),vec.end());
-reverse(vec.begin(),vec.end());
-int l=0;
-int r=0;
+sort(vec.begin(), vec.end(), [](int a, int b) {
+        return (a % 2 == 0) && (b % 2 != 0); // True if 'a' is even and 'b' is odd
+    });
+    //selective sorting so as to put even before odd
+    //multiply 2 to those who need it the most
+    //observed from DRY run if ai is 1 and aj is 2 then obviously it would have been better if they were on each other's place so that specifies the even odd
+    //sort logic
+
 int ans=0;
-for(l=0;l<n;l++){
-    int ai=vec[l];
-    for(r=l+1;r<n;r++){
-        int aj=vec[r];
-        if(__gcd(ai,2*aj)>1){
-            ans++;
+
+ for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (__gcd(vec[i], 2 * vec[j]) > 1) {
+                ans++;
+            }
         }
     }
 
-}
-cout<<ans<<endl;
+    cout << ans << endl;
 
 }
 int main()
